@@ -4,17 +4,17 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
+# Install Maven (since we don't have mvnw)
+RUN apk add --no-cache maven
+
 # Copy project files
 COPY . .
 
-# Give permission to mvnw
-RUN chmod +x mvnw
+# Build the project (skip tests for faster builds)
+RUN mvn clean package -DskipTests
 
-# Build the project
-RUN ./mvnw clean package -DskipTests
-
-# Expose port (important)
+# Expose port (important for container runtime)
 EXPOSE 8080
 
-# Run Spring Boot jar
+# Run Spring Boot JAR file
 CMD ["java", "-jar", "target/*.jar"]
