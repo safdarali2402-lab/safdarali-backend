@@ -1,12 +1,12 @@
 services:
   - type: web
     name: safdarali-backend
-    env: java
+    runtime: docker
     plan: free
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar target/*.jar
     region: singapore
     autoDeploy: true
+
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: JAVA_VERSION
         value: 17
