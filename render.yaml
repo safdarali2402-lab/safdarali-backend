@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: safdarali-backend
+    env: java
+    plan: free
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/*.jar
+    region: singapore
+    autoDeploy: true
+    envVars:
+      - key: JAVA_VERSION
+        value: 17
